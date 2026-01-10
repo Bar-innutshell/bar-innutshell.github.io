@@ -5,6 +5,7 @@
   }
 
   .grid-3 {
+    grid-template-columns: repeat(2, 1fr);
     gap: 1rem;
   }
 
@@ -13,7 +14,14 @@
   }
 }
 
+@media screen and (max-width: 640px) {
+  .grid-3 {
+    grid-template-columns: 1fr;
+  }
+}
+
 @media screen and (max-width: 825px) {
+
   /* Burger */
   .burger {
     display: block;
@@ -58,6 +66,7 @@
   .nav-active {
     transform: translateX(0);
   }
+
   /* End of Navigation */
 
   :root {
@@ -115,6 +124,7 @@
 
 /* Mobile Size */
 @media screen and (max-width: 640px) {
+
   /* Titles */
   .section-title {
     font-size: 1.3rem;
@@ -123,12 +133,12 @@
   .pre-title {
     font-size: 0.7rem;
   }
-  
+
   /* Navigation for smaller screens */
   nav {
     width: 80%;
   }
-  
+
   .burger {
     top: 25px;
     right: 25px;
@@ -140,7 +150,7 @@
   nav {
     width: 85%;
   }
-  
+
   .burger {
     top: 20px;
     right: 20px;

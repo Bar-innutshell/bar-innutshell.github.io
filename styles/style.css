@@ -1,11 +1,14 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap");
 
 :root {
-  --primaryTextColor: #232e35; /* Untuk title atau judul */
-  --secondaryTextColor: #656d72; /* Untuk text biasa seperti paragraph contohnya */
+  --primaryTextColor: #232e35;
+  /* Untuk title atau judul */
+  --secondaryTextColor: #656d72;
+  /* Untuk text biasa seperti paragraph contohnya */
 
   --borderColor: #f1f1f1;
-  --lineColor: #d9d9d9; /* untuk line di pre-title */
+  --lineColor: #d9d9d9;
+  /* untuk line di pre-title */
 
   --primaryBackgroundColor: #fff;
   --secondaryBackgroundColor: #fbfbfb;
@@ -41,8 +44,10 @@ strong {
 }
 
 p {
-  font-size: 1rem; /* 16 px */
-  line-height: 1.9rem; /*30.4 px */
+  font-size: 1rem;
+  /* 16 px */
+  line-height: 1.9rem;
+  /*30.4 px */
 }
 
 p,
@@ -115,8 +120,7 @@ a {
 /* Layouts */
 .grid-3 {
   display: grid;
-  /* grid-template-columns: 1fr 1fr 1fr; use this first, use code below when its time for explaining responsive design part */
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: 3rem;
 }
 
@@ -195,7 +199,6 @@ nav ul li a {
 
 .hero-right img {
   width: 90%;
-  outline: 1px solid var(--borderColor);
   border-radius: 5%;
 }
 
@@ -262,18 +265,32 @@ nav ul li a {
 
 .portfolio {
   border-radius: var(--itemBorderRadius);
-  overflow: hidden; /* supaya gambar yang diatas itu dia ngikut border radiusnya, karena yang dikasih border radius disini adalah div portfolio ini */
+  overflow: hidden;
+  /* supaya gambar yang diatas itu dia ngikut border radiusnya, karena yang dikasih border radius disini adalah div portfolio ini */
   border: 1px solid var(--borderColor);
+  display: block;
+  text-decoration: none;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.portfolio:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
 .portfolio-cover {
-  height: 250px;
+  height: 320px;
+  background: var(--secondaryBackgroundColor);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .portfolio img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
 }
 
 .portfolio-info {
