@@ -124,6 +124,11 @@ a {
   gap: 3rem;
 }
 
+/* Portfolio grid - 2 columns */
+#portfolios .grid-3 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
 /* --- Logo and Navigation Menu --- */
 .nav {
   display: flex;
@@ -281,7 +286,7 @@ nav ul li a {
 
 .portfolio-cover {
   height: 320px;
-  background: var(--secondaryBackgroundColor);
+  background: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -295,6 +300,10 @@ nav ul li a {
 
 .portfolio-info {
   padding: 2rem 1.5rem;
+}
+
+.portfolio-info p {
+  text-align: justify;
 }
 
 .portfolio-title {
@@ -319,22 +328,38 @@ nav ul li a {
 
 .portfolio-tags {
   display: flex;
-  gap: 1rem;
+  gap: 0.5rem;
   margin: 1rem 0;
+  overflow: hidden;
+  position: relative;
+}
+
+.portfolio-tags-inner {
+  display: flex;
+  gap: 0.5rem;
+  white-space: nowrap;
+}
+
+.portfolio:hover .portfolio-tags.scrollable .portfolio-tags-inner {
+  animation: scroll-tags 15s linear infinite;
+}
+
+@keyframes scroll-tags {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
 }
 
 .portfolio-tags div {
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   border: 1px solid var(--borderColor);
-  padding: 0.4rem 1rem;
+  padding: 0.3rem 0.8rem;
   color: var(--secondaryTextColor);
-}
-
-.portfolio-tags div {
-  font-size: 0.9rem;
-  border: 1px solid var(--borderColor);
-  padding: 0.4rem 1rem;
-  color: var(--secondaryTextColor);
+  flex-shrink: 0;
 }
 
 /* Skills and Education */
