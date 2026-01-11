@@ -1436,3 +1436,55 @@ footer {
 footer p {
   font-size: 0.9rem;
 }
+
+/* ===== NOTIFICATION POPUP ===== */
+.notification-popup {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  background: var(--primaryBackgroundColor);
+  border: 1px solid var(--primaryIconColor);
+  border-radius: 1rem;
+  padding: 1rem 1.5rem;
+  box-shadow: var(--cardShadowHover);
+  z-index: 1000;
+  transform: translateY(100px);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  max-width: 400px;
+}
+
+.notification-popup.show {
+  transform: translateY(0);
+  opacity: 1;
+  visibility: visible;
+}
+
+.notification-content {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.notification-content .icon {
+  color: var(--primaryIconColor);
+  min-width: 32px;
+}
+
+.notification-content p {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--primaryTextColor);
+  line-height: 1.4;
+}
+
+@media screen and (max-width: 768px) {
+  .notification-popup {
+    bottom: 1rem;
+    right: 1rem;
+    left: 1rem;
+    max-width: none;
+  }
+}

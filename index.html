@@ -504,15 +504,16 @@
       <div class="contact main-container">
         <div class="contact-left">
           <form
+          id="contact-form"
           action="https://formspree.io/f/xwkgglqw"
           method="POST"
             class="contact-form"
           >
             <div>
-              <input type="text" placeholder="Name" name="name" />
+              <input type="text" placeholder="Name" name="name" required />
             </div>
             <div>
-              <input type="email" placeholder="Email" name="email" />
+              <input type="email" placeholder="Email" name="email" required />
             </div>
             <div>
               <textarea
@@ -521,10 +522,11 @@
                 cols="30"
                 rows="10"
                 placeholder="Message"
+                required
               ></textarea>
             </div>
             <div>
-              <button class="btn-submit">Send Message</button>
+              <button type="submit" class="btn-submit">Send Message</button>
             </div>
           </form>
         </div>
@@ -608,6 +610,14 @@
       </div>
     </div>
     
+    <!-- Notification Popup -->
+    <div id="notification-popup" class="notification-popup">
+      <div class="notification-content">
+        <span class="icon icon-lg icon-check-circle"></span>
+        <p>Pesan terkirim, Terimakasih sudah mengirimkan pesan 😁</p>
+      </div>
+    </div>
+
     <script src="js/main.js"></script>
   </body>
 </html>

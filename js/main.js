@@ -484,3 +484,98 @@ const initLightbox = () => {
 };
 
 initLightbox();
+
+// ===== Contact Form with Anti-Spam & AJAX =====
+const initContactForm = () => {
+  const form = document.querySelector('#contact-form');
+  const notification = document.querySelector('#notification-popup');
+
+  if (!form) return;
+
+  const showNotification = () => {
+    if (notification) {
+      notification.classList.add('show');
+      setTimeout(() => {
+        notification.classList.remove('show');
+      }, 5000);
+    } else {
+      alert('Pesan terkirim, Terimakasih sudah mengirimkan pesan 😁');
+    }
+  };
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    // Anti-Spam Logic
+    const RATE_LIMIT_HOURS = 1;
+    const MAX_SUBMISSIONS = 2;
+    const now = Date.now();
+
+    // Get stored data
+    let submissions = JSON.parse(localStorage.getItem('formSubmissions') || '{"count": 0, "timestamp": 0}');
+
+    // Check if rate limit period has passed
+    const timeDiff = now - submissions.timestamp;
+    const hoursDiff = timeDiff / (1000 * 60 * 60);
+
+    if (hoursDiff >= RATE_LIMIT_HOURS) {
+      // Reset if more than 1 hour passed
+      submissions = { count: 0, timestamp: now };
+    }
+
+    if (submissions.count >= MAX_SUBMISSIONS) {
+      alert(`Mohon maaf, Anda telah mencapai batas pengiriman pesan, Silakan coba lagi nanti.`);
+      return;
+    }
+
+    // Submit form via AJAX
+    const submitBtn = form.querySelector('button[type="submit"]');
+    const originalBtnText = submitBtn.innerText;
+
+    // Loading state
+    submitBtn.innerText = 'Sending...';
+    submitBtn.disabled = true;
+
+    try {
+      const formData = new FormData(form);
+      const response = await fetch(form.action, {
+        method: 'POST',
+        body: formData,
+        headers: {
+          'Accept': 'application/json'
+        }
+      });
+
+      if (response.ok) {
+        // Success
+        form.reset();
+        showNotification();
+
+        // Update anti-spam storage
+        submissions.count += 1;
+        // Logic: if count was 0, set timestamp. If count > 0, keep timestamp (window starts from first msg)
+        if (submissions.count === 1) {
+          submissions.timestamp = now;
+        }
+        localStorage.setItem('formSubmissions', JSON.stringify(submissions));
+
+      } else {
+        // Error
+        const data = await response.json();
+        if (Object.hasOwn(data, 'errors')) {
+          alert(data['errors'].map(error => error['message']).join(", "));
+        } else {
+          alert('Oops! Ada masalah saat mengirim pesan Anda.');
+        }
+      }
+    } catch (error) {
+      alert('Oops! Ada masalah saat mengirim pesan Anda.');
+    } finally {
+      // Reset button
+      submitBtn.innerText = originalBtnText;
+      submitBtn.disabled = false;
+    }
+  });
+};
+
+initContactForm();
