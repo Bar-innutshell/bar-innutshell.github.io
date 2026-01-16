@@ -1271,6 +1271,121 @@ nav ul li a:hover::after {
   position: relative;
 }
 
+/* ===== COMMUNITY & ORGANIZATION SECTION ===== */
+#community {
+  padding: var(--sectionPadding);
+  background: var(--secondaryBackgroundColor);
+  transition: background-color var(--transition-medium);
+}
+
+/* Light gray container for logos in dark mode */
+[data-theme="dark"] #community {
+  background: #374151;
+}
+
+.community .pre-title {
+  margin: 0 auto;
+}
+
+.community-title {
+  text-align: center;
+}
+
+.org-logos {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 3rem;
+  margin-top: 3rem;
+}
+
+.org-logo-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: all var(--transition-medium);
+}
+
+.org-logo-item a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+}
+
+.org-logo-item img {
+  width: 150px;
+  height: 150px;
+  object-fit: contain;
+  transition: all var(--transition-medium);
+
+  /* Grayscale effect by default */
+  filter: grayscale(100%);
+  opacity: 0.5;
+}
+
+/* Dark mode: keep grayscale, no invert needed since background is light gray */
+[data-theme="dark"] .org-logo-item img {
+  filter: grayscale(100%);
+  opacity: 0.6;
+}
+
+.org-logo-item:hover img {
+  /* Full color on hover */
+  filter: grayscale(0%);
+  opacity: 1;
+  transform: scale(1.15) translateY(-8px);
+}
+
+[data-theme="dark"] .org-logo-item:hover img {
+  filter: grayscale(0%) brightness(1);
+  opacity: 1;
+}
+
+.org-name {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  color: var(--secondaryTextColor);
+  font-weight: 500;
+  text-align: center;
+  max-width: 180px;
+  line-height: 1.4;
+  transition: color var(--transition-fast);
+}
+
+.org-logo-item:hover .org-name {
+  color: var(--primaryIconColor);
+}
+
+/* Responsive for smaller screens */
+@media screen and (max-width: 768px) {
+  .org-logos {
+    gap: 2rem;
+  }
+
+  .org-logo-item img {
+    width: 120px;
+    height: 120px;
+  }
+
+  .org-name {
+    font-size: 0.8rem;
+    max-width: 140px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .org-logos {
+    gap: 1.5rem;
+  }
+
+  .org-logo-item img {
+    width: 100px;
+    height: 100px;
+  }
+}
+
 /* ===== CONTACT SECTION ===== */
 #contact {
   padding: var(--sectionPadding);
