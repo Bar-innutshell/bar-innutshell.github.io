@@ -579,3 +579,35 @@ const initContactForm = () => {
 };
 
 initContactForm();
+
+// ===== Back to Top Button =====
+const initBackToTop = () => {
+  const backToTopBtn = document.getElementById('back-to-top');
+
+  if (!backToTopBtn) return;
+
+  // Show/hide button based on scroll position
+  const toggleVisibility = () => {
+    if (window.scrollY > 400) {
+      backToTopBtn.classList.add('visible');
+    } else {
+      backToTopBtn.classList.remove('visible');
+    }
+  };
+
+  // Scroll to top on click
+  backToTopBtn.addEventListener('click', () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  });
+
+  // Listen for scroll events
+  window.addEventListener('scroll', toggleVisibility);
+
+  // Check initial state
+  toggleVisibility();
+};
+
+initBackToTop();
