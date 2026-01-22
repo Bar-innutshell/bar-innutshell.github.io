@@ -1,6 +1,23 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap");
 
 /* ===== CSS VARIABLES - LIGHT MODE (DEFAULT) ===== */
+/* Portfolio Loading States */
+.portfolio-loading {
+  text-align: center;
+  padding: 3rem;
+  color: var(--text-secondary);
+  font-size: 1rem;
+}
+
+.portfolio-error {
+  text-align: center;
+  padding: 2rem;
+  color: #e74c3c;
+  background: rgba(231, 76, 60, 0.1);
+  border-radius: 0.5rem;
+  margin: 1rem;
+}
+
 :root {
   /* Primary Colors */
   --primaryTextColor: #1a1a2e;

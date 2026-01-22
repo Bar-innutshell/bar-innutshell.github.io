@@ -1,3 +1,41 @@
+// ===== Load Portfolio Partials (Like Laravel @include) =====
+const loadPortfolioPartials = async () => {
+  const partials = [
+    { container: '#software', file: 'html/SoftDev.html' },
+    { container: '#photography', file: 'html/Photograf.html' }
+  ];
+
+  const loadPromises = partials.map(async ({ container, file }) => {
+    const containerEl = document.querySelector(container);
+    if (!containerEl) return;
+
+    try {
+      const response = await fetch(file);
+      if (!response.ok) throw new Error(`Failed to load ${file}`);
+
+      const html = await response.text();
+      containerEl.innerHTML = html;
+    } catch (error) {
+      console.error(`Error loading partial ${file}:`, error);
+      containerEl.innerHTML = `<p class="portfolio-error">Failed to load content. Please refresh the page.</p>`;
+    }
+  });
+
+  await Promise.all(loadPromises);
+
+  // Re-initialize portfolio-related JavaScript after content is loaded
+  checkTagsOverflow();
+  initPhotoCarousels();
+  initLightbox();
+
+  // Update slider height
+  const slider = document.querySelector('.portfolio-slider');
+  const activeSlide = document.querySelector('.portfolio-slide.active');
+  if (activeSlide && slider) {
+    slider.style.height = `${activeSlide.offsetHeight}px`;
+  }
+};
+
 // ===== Toggle & Responsive Navigation =====
 const navSlide = () => {
   const burger = document.querySelector(".burger");
@@ -611,3 +649,8 @@ const initBackToTop = () => {
 };
 
 initBackToTop();
+
+// ===== Load Portfolio Partials on DOMContentLoaded =====
+document.addEventListener('DOMContentLoaded', () => {
+  loadPortfolioPartials();
+});
